@@ -1,5 +1,5 @@
 # TS
-There is a UI to test this project, if you manage to run it in VS, you can go to (http://localhost:27417/swagger) to see what are the api availables and test the api directly via swagger.
+Swagger framework is added to test this project, if you manage to run it in VS, you can go to (http://localhost:27417/swagger) to see what are the api availables and test the api directly via swagger.
 Unity Dependency Injection framework is used to make components more testable
 Some limitations due to time constraints:
 - At the moment the data is stored locally in a dictionary instead of database due to time constraint but it is designed to be replaceable with more suitable storage solution. Ideally it should be stored in a sql db instead of plain dictionary to make it scalable.
