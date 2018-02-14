@@ -28,7 +28,7 @@ namespace TSTest.Mock
             {
                 Title = "Issue 2",
                 Description = "Description 2",
-                Priority = Priority.Low,
+                Priority = Priority.High,
                 Status = Status.Active,
                 AssignedTo = "None"
             };

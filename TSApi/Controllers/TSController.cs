@@ -89,7 +89,7 @@ namespace TSApi.Controllers
         {
             myStorage.DeleteIssue(issueId);
 
-            return StatusCode(HttpStatusCode.OK);
+            return Ok();
         }
     }
 }
