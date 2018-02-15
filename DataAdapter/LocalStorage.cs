@@ -36,6 +36,22 @@ namespace DataAdapter
             return issueId;
         }
 
+        public string CreateComment(string issueId, NewComment newComment)
+        {
+            var commentId = Guid.NewGuid().ToString();
+            if (this.CurrentIssues.ContainsKey(issueId))
+            {
+                var comment = new Comment(newComment);
+                comment.CommentId = commentId;
+                comment.TimeStamp = DateTime.UtcNow;
+                this.CurrentIssues[issueId].Comments.Add(comment);
+
+                return commentId;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Data adapter that will delete an issue based on id from the local storage
         /// </summary>
@@ -51,9 +67,27 @@ namespace DataAdapter
         /// based on specified pagination
         /// </summary>
         /// <returns>List of issues</returns>
-        public List<Issue> GetIssues()
+        /// <param name="startIndex">startIndex.</param>
+        /// <param name="count">count.</param>
+        public List<Issue> GetIssues(uint startIndex, uint count)
         {
-            return this.CurrentIssues.Values.ToList();
+            var curCount = (uint)this.CurrentIssues.Count;
+            var countToGet = count;
+            if (curCount >= startIndex)
+            {
+                countToGet = Math.Min(curCount - startIndex, count);
+            }
+            else
+            {
+                return null;
+            }
+
+            var retval = this.CurrentIssues
+                             .Values
+                             .Skip((int)startIndex)
+                             .Take((int)countToGet);
+
+            return retval.ToList();
         }
 
         /// <summary>

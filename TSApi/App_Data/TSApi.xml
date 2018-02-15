@@ -481,7 +481,7 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:TSApi.Controllers.TSController.GetIssues">
+        <member name="M:TSApi.Controllers.TSController.GetIssues(System.UInt32,System.UInt32)">
             <summary>
             Get all issues available
             </summary>
@@ -509,6 +509,14 @@
             </summary>
             <param name="newIssue"></param>
             <returns></returns>
+        </member>
+        <member name="M:TSApi.Controllers.TSController.CreateComment(System.String,DataModel.NewComment)">
+            <summary>
+            Create a new comment
+            </summary>
+            <returns>The comment id</returns>
+            <param name="issueId">Issue identifier.</param>
+            <param name="newComment">New comment.</param>
         </member>
         <member name="M:TSApi.Controllers.TSController.UpdateIssue(DataModel.Issue)">
             <summary>

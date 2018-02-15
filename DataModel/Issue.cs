@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataModel
 {
@@ -54,7 +55,12 @@ namespace DataModel
         /// Issue Id
         /// </summary>
         [Required]
-        public readonly string Id;
+        public string Id;
+
+        /// <summary>
+        /// The comments for this issue
+        /// </summary>
+        public List<Comment> Comments;
 
         public Issue()
         {
@@ -68,6 +74,7 @@ namespace DataModel
             this.Priority = newIssue.Priority;
             this.Status = newIssue.Status;
             this.AssignedTo = newIssue.AssignedTo;
+            this.Comments = new List<Comment>();
         }
     }
 }

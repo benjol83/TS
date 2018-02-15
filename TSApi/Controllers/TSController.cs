@@ -19,9 +19,9 @@ namespace TSApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Issue> GetIssues()
+        public List<Issue> GetIssues(uint startIndex, uint count)
         {
-            var retval = myStorage.GetIssues();
+            var retval = myStorage.GetIssues(startIndex, count);
             return retval;
         }
 
@@ -67,6 +67,24 @@ namespace TSApi.Controllers
         }
 
         /// <summary>
+        /// Create a new comment
+        /// </summary>
+        /// <returns>The comment id</returns>
+        /// <param name="issueId">Issue identifier.</param>
+        /// <param name="newComment">New comment.</param>
+        [HttpPost]
+        public string CreateComment(string issueId, [FromBody]NewComment newComment)
+        {
+            var newCommentId = myStorage.CreateComment(issueId, newComment);
+            if (string.IsNullOrWhiteSpace(newCommentId))
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            return newCommentId;
+        }
+
+        /// <summary>
         /// Update existing issue
         /// </summary>
         /// <param name="issueToUpdate"></param>
@@ -75,6 +93,7 @@ namespace TSApi.Controllers
         public Issue UpdateIssue([FromBody]Issue issueToUpdate)
         {
             var updatedIssue = myStorage.UpdateIssue(issueToUpdate);
+            if (updatedIssue == null) throw new HttpResponseException(HttpStatusCode.NotFound);
 
             return updatedIssue;
         }

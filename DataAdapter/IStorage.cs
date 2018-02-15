@@ -6,7 +6,7 @@ namespace DataAdapter
     public interface IStorage
     {
         //GET
-        List<Issue> GetIssues();
+        List<Issue> GetIssues(uint startIndex, uint count);
 
         //GET
         List<Issue> SearchIssues(string title, Priority priority, Status status, string assignedTo);
@@ -16,6 +16,9 @@ namespace DataAdapter
 
         //POST
         string CreateIssue(NewIssue newIssue);
+
+        //POST
+        string CreateComment(string issueId, NewComment newComment);
 
         //POST
         Issue UpdateIssue(Issue issue);
